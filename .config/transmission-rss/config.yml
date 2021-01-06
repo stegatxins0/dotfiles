@@ -1,0 +1,8 @@
+feeds:
+  - url: https://nyaa.si/?page=rss
+    regexp: \[Judas\] Shingeki no Kyojin - S04E.*\[1080p\].*
+    download_path: /mnt/storage/日本語/アニメ/進撃の巨人
+  - url: https://nyaa.si/?page=rss
+    regexp: \[SubsPlease\] Boruto - Naruto Next Generations -.*(1080p).*
+    download_path: /mnt/storage/日本語/アニメ/ボルト
+ 

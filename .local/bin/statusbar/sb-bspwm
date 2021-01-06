@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Note to me: rewrite the script so it only update changed desktop instead of rerunning everything just like dwmblocks
+
+current=$(bspc query -D -d .focused --names)
+occupied=$(bspc query -D -d .occupied --names)
+color_current=$'\e[1;31m'
+color_occupied=$'\e[1;32m'
+color_reset=$'\e[0m'
+
+out="$(bspc query -D --names | sed ':a; N; $!ba; s/\n/ /g' )"
+for des in $occupied;
+do
+    out="$(echo $out | sed "0,/$des/s//color_occupied $des color_reset/")"
+done
+function noh() {
+    echo $out | grep -q "color_occupied H" && \
+    out="$(echo $out | sed "s/ color_occupied H//")" || \
+    out="$(echo $out | sed "s/ H//")" && \
+    out="$(echo $out | sed "s/color_occupied $current/color_current $current/")"
+}
+[[ $current -eq "H" ]] && \
+    out=" $(echo $out | sed "s/color_occupied $current/color_current $current/")" || \
+    noh
+out="$(echo $out | sed "s/color_occupied /${color_occupied}/g")"
+out="$(echo $out | sed "s/color_current /${color_current}/g")"
+out="$(echo $out | sed "s/ color_reset/${color_reset}/g")"
+printf "$out"

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ $(pamixer --get-mute) = true ] && echo 無音 && exit
+pamixer --get-volume
+

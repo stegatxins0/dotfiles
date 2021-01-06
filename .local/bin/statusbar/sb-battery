@@ -1,0 +1,21 @@
+#!/bin/sh
+
+for battery in /sys/class/power_supply/BAT?*
+do
+	# Sets up the status and capacity
+	capacity=$(cat "$battery/capacity")
+    [ $capacity -gt 100 ] && capacity=100
+	stat=$(cat "$battery/status")
+	case "$stat" in
+		"Full") status=plugged ;;
+		"Charging") status=plugged ;;
+		"Not charging") status=plugged ;;
+		"Discharging") status=notplugged ;;
+		"Unknown") status=notplugged ;;
+	esac
+    case "$status" in
+        "notplugged") color="\e[1;31m" ;;
+        "plugged") color="\e[1;32m" ;;
+    esac
+    printf "${color}${capacity}\e[0m"
+done 

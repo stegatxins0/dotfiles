@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Status bar module for disk space
+
+printf "/dev/sda3: $(df -h /dev/sda3 | awk ' /[0-9]/ {print $3 "/" $2}') | /dev/sdb1: $(df -h /dev/sdb1 | awk ' /[0-9]/ {print $3 "/" $2}')"

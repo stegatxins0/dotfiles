@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat /sys/class/net/wlp3s0/operstate | sed "s/down/未接続/;s/up/接続/"
