@@ -69,3 +69,6 @@ Below is a list of programs I use. You can find some very useful scripts in `~/.
 
 ## Deploy these dotfiles 
 Clone the repo files directly to your home directory
+```bash
+$ git clone "https://github.com/stegatxins0/dotfiles.git ~"
+```
