@@ -1,0 +1,4 @@
+#!/bin/sh
+
+location=/mnt/storage/日本語/アニメ 
+mpv $location/$(ls $location | dmenu -l 99 -p "Which anime to play")
