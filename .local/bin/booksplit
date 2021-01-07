@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Requires ffmpeg (audio splitting) and my `tag` wrapper script.
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/booksplit
 
 [ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
 

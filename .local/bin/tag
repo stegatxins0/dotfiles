@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/tag
+
 err() { echo "Usage:
 	tag [OPTIONS] file
 Options:
