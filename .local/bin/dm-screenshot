@@ -5,9 +5,12 @@
 # highlighting an area to copy. scrotcucks on suicidewatch right now.
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/maimpick
 
-case "$(printf "a selected area (local)\\na selected area (copy)\\na selected area (upload)\\ncurrent window (copy)" | dmenu -l 6 -i -p "Screenshot which area?")" in
+case "$(printf "a selected area (local)\\na selected area (copy)\\na selected area (upload)\\ncurrent window (copy)\\nocr (japanese)\\nocr (english)\\nocr (japanese vertical)" | dmenu -l 7 -i -p "Screenshot which area?")" in
     "a selected area (local)") maim -s ~/screenshot/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
 	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
 	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
     "a selected area (upload)") maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png | xclip -selection clipboard ;;
+    "ocr (japanese)") maim -s | ocr jpn ;;
+    "ocr (english)") maim -s | ocr eng ;;
+    "ocr (japanese vertical)") maim -s | ocr jpn_vert ;;
 esac

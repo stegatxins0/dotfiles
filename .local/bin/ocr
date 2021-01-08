@@ -1,0 +1,12 @@
+#!/bin/sh
+
+lang=$1
+
+cat | \
+tesseract -l $lang stdin stdout | \
+tr -d [:space:] | xclip -i -sel c
+if [ "$(xclip -o -sel c)" ];then
+    notify-send "Copied OCR text to the clipboard."
+else
+    notify-send "No text detected."
+fi
