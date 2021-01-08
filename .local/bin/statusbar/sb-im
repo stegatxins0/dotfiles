@@ -1,0 +1,4 @@
+#!/bin/sh
+# switch input method with fcitx-remote -t
+
+qdbus "org.fcitx.Fcitx" "/inputmethod" "GetCurrentIM" | sed "s/fcitx-keyboard-us-//"

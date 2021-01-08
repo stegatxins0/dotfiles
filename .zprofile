@@ -18,4 +18,10 @@ export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 
+# Fcitx
+export GTK_IM_MODULE='fcitx'
+export QT_IM_MODULE='fcitx'
+export SDL_IM_MODULE='fcitx'
+export XMODIFIERS='@im=fcitx'
+
 [ "$(tty)" = "/dev/tty1" ] && exec startx
