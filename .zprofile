@@ -2,8 +2,6 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
-export SPOTIFY_CLIENT_ID='df8cf03a26f54ab4b629c5edaf1274da'
-export SPOTIFY_CLIENT_SECRET='0102d0aceb064887b38b971c93e1c966'
 # Default programs
 export EDITOR="nvim"
 export TERMINAL="alacritty"
@@ -23,5 +21,7 @@ export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
+export TERM=rxvt #fix ssh
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx
+
