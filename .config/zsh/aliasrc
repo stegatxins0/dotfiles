@@ -25,7 +25,7 @@ alias \
 alias \
 	ka="killall" \
 	g="git" \
-	sdn="sudo shutdown -h now" \
+	sdn="shutdown now" \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
