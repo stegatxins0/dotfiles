@@ -1,0 +1,15 @@
+mxid: '@xxx:xxx'
+device_id: xxx
+access_token: xxx
+homeserver: https://matrix.xxx.xxx
+room_cache_size: 32
+room_cache_age: 60
+notify_sound: true
+send_to_verified_only: false
+data_dir: /home/stegatxins0/.local/share/gomuks
+cache_dir: /home/stegatxins0/.cache/gomuks
+history_path: /home/stegatxins0/.cache/gomuks/history.db
+room_list_path: /home/stegatxins0/.cache/gomuks/rooms.gob.gz
+media_dir: /home/stegatxins0/.cache/gomuks/media
+download_dir: /home/stegatxins0/Downloads
+state_dir: /home/stegatxins0/.cache/gomuks/state
