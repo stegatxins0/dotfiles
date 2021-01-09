@@ -48,8 +48,7 @@ Below is a list of programs I use. You can find some very useful scripts in `~/.
 ### Chat
 | Types                | Programs                                                                                                |
 | -------------------- | ------------------------------------------------------------------------------------------------------- |
-| Chat Client          | [weechat](https://weechat.org/)                                                                         |
-| Telegram             | [tg](https://github.com/paul-nameless/tg)
+| Chat Client          | [gomuks](https://github.com/tulir/gomuks)                                                                         |
 
 ### Protect your eyes
 | Types                | Programs                                                                                                |
@@ -65,7 +64,7 @@ Below is a list of programs I use. You can find some very useful scripts in `~/.
 | Compositor           | [picom](https://github.com/yshui/picom)                                                                 |
 | Wifi                 | [networkmanager](https://gitlab.freedesktop.org/NetworkManager/NetworkManager)                          |
 | Image Viewer         | [sxiv](https://github.com/muennich/sxiv)                                                                |
-| VPN                  | [nordvpn](https://aur.archlinux.org/packages/nordvpn-bin/)                                              |
+| VPN                  | [protonvpn](https://github.com/ProtonVPN/linux-cli)                                                     |
 
 ## Deploy these dotfiles 
 Clone the repo files directly to your home directory
