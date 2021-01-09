@@ -5,5 +5,6 @@ mpd &
 transmission-daemon &
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
 redshift -P -O 3500 &
-fcitx -d
-# workrave
+fcitx -d &
+dunst &
+workrave
