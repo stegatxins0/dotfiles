@@ -4,9 +4,12 @@
 
 current=$(bspc query -D -d .focused --names)
 occupied=$(bspc query -D -d .occupied --names)
-color_current=$'\e[1;31m'
-color_occupied=$'\e[1;32m'
-color_reset=$'\e[0m'
+# color_current=$'\e[1;31m'
+# color_occupied=$'\e[1;32m'
+# color_reset=$'\e[0m'
+color_current=%%{F#FF0000}
+color_occupied=%%{F#00FF00}
+color_reset=%%{F-}
 
 out="$(bspc query -D --names | sed ':a; N; $!ba; s/\n/ /g' )"
 for des in $occupied;
@@ -22,6 +25,8 @@ function noh() {
 [[ $current -eq "H" ]] && \
     out=" $(echo $out | sed "s/color_occupied $current/color_current $current/")" || \
     noh
+
+[ bspc query -D -d focused.occupied ] || out="$(echo $out | sed "0,/$current/s//color_current $current color_reset/")"
 out="$(echo $out | sed "s/color_occupied /${color_occupied}/g")"
 out="$(echo $out | sed "s/color_current /${color_current}/g")"
 out="$(echo $out | sed "s/ color_reset/${color_reset}/g")"

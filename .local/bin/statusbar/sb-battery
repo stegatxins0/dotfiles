@@ -14,8 +14,11 @@ do
 		"Unknown") status=notplugged ;;
 	esac
     case "$status" in
-        "notplugged") color="\e[1;31m" ;;
-        "plugged") color="\e[1;32m" ;;
+        "notplugged") color=%%{F#FF0000} ;;
+        "plugged") color=%%{F#00FF00} ;;
+        # "notplugged") color="\e[1;31m" ;;
+        # "plugged") color="\e[1;32m" ;;
     esac
-    printf "${color}${capacity}\e[0m"
+    printf "${color}${capacity}%%{F-}"
+    # printf "${color}${capacity}\e[0m"
 done 

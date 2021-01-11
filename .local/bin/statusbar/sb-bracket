@@ -1,0 +1,8 @@
+#!/bin/sh
+
+resetcolor=%{F-}
+case "$2" in
+	1) color=%{F#6a0dad} ;;
+	2) color=%{F#0000ff} ;;
+esac
+$1 | sed "s/^/${color}[ ${resetcolor}/;s/$/${color} ]${resetcolor}/"

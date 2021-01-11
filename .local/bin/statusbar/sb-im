@@ -1,4 +1,4 @@
 #!/bin/sh
 # switch input method with fcitx-remote -t
 
-qdbus "org.fcitx.Fcitx" "/inputmethod" "GetCurrentIM" | sed "s/fcitx-keyboard-us-//"
+qdbus "org.fcitx.Fcitx" "/inputmethod" "GetCurrentIM" | sed "s/fcitx-keyboard-us-dvorak/英/;s/mozc/日/"

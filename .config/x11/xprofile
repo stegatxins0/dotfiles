@@ -7,4 +7,6 @@ xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
 redshift -P -O 3500 &
 fcitx -d &
 dunst &
-workrave
+transmission-rss -f &
+sb-mpdup &
+polybar bar

@@ -1,0 +1,85 @@
+[colors]
+background = #222
+foreground = #dfdfdf
+primary = #ffb52a
+secondary = #e60053
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/bar]
+background = ${colors.background}
+foreground = ${colors.foreground}
+font-0 = JetBrainsMonoMedium:pixelsize=16;
+font-1 = HackNerdFont:pixelsize=16;
+font-2 = NotoColorEmoji:fontformat=truetype:scale=16:antialias=false;
+font-3 = IPAGothic:fontformat=truetype:pixelsize=16:antialias=false;
+enable-ipc = true
+modules-left = bspwm title music
+modules-right = volume im cpu disk internet battery clock
+separator = " " 
+
+[module/bspwm]
+type = custom/ipc
+hook-0 = sb-bracket sb-bspwm 1
+initial = 1
+
+[module/title]
+type = custom/ipc
+hook-0 = sb-bracket sb-title 2
+initial = 1
+
+[module/music]
+type = custom/ipc
+hook-0 = sb-bracket sb-music 1
+initial = 1
+
+[module/volume]
+type = custom/ipc
+hook-0 = sb-bracket sb-volume 2
+initial = 1
+
+[module/cpu]
+type = custom/script
+exec = sb-bracket sb-cpu 1
+interval = 10
+
+[module/disk]
+type = custom/script
+exec = sb-bracket sb-disk 2
+interval = 60
+
+[module/torrent]
+type = custom/script
+exec = sb-bracket sb-torrent 1
+interval = 20
+
+[module/nettraf]
+type = custom/script
+exec = sb-bracket sb-nettraf 2
+interval = 1
+
+[module/internet]
+type = custom/script
+exec = sb-bracket sb-internet 1
+interval = 5
+
+[module/battery]
+type = custom/script
+exec = sb-bracket sb-battery 2
+interval = 5
+
+[module/clock]
+type = custom/script
+exec = sb-bracket sb-clock 1
+interval = 60
+
+[module/im]
+type = custom/ipc
+hook-0 = sb-bracket sb-im 1
+initial = 1
+; vim:ft=dosini
