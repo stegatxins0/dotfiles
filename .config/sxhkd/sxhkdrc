@@ -1,0 +1,107 @@
+# bspwm-specific Hotkeys
+
+# Change focus
+super + {j,k}
+    bspc node --focus {next.local,prev.local}; polybar-msg hook title 1
+
+# Move window
+super + shift + {j,k}
+    bspc node -s {next.local,prev.local}; polybar-msg hook title 1
+
+# Close and kill window
+super + {_,shift + }w
+	bspc node -{c,k}; polybar-msg hook title 1
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '{1-9,H}'; polybar-msg hook bspwm 1; polybar-msg hook title 1
+
+# focus next occupied desktop
+super + semicolon
+    bs-next; polybar-msg hook bspwm 1
+
+# focus next occupied desktop
+super + q
+    bs-last; polybar-msg hook bspwm 1
+
+# Fullscreen toggle
+super + f
+    bspc desktop --layout next; polybar-msg hook title 1
+
+# Resize
+super + {h,l}
+    bs-resize {west,east}; polybar-msg hook title 1
+
+# Reload config
+super + F2
+     ~/.config/bspwm/bspwmrc
+
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# 
+# Volume
+#
+super + {Up,Down}
+    pamixer -u && pamixer -{i,d} 5; polybar-msg hook volume 1
+
+super + Left
+    pamixer -m; polybar-msg hook volume 1
+
+#
+# MPD and MPV
+#
+super + shift + {Left,Right}
+    mpc {prev,next}
+
+super + Right
+    mpc toggle
+
+super + shift + Down
+    mpc pause; pauseallmpv
+    
+super + shift + Up
+    pauseallmpv false
+
+super + alt + Left
+    mpc repeat; mp-notify
+
+super + alt + Down
+    mpc single; mp-notify
+
+super + alt + Right
+    mp-random; mp-notify 
+
+#
+# Japanese
+#
+super + Tab
+    fcitx-remote -t; polybar-msg hook im 1
+
+Print
+    maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png | xclip -selection clipboard ;;
+
+Super + Print
+    dm-screenshot
+
+F6
+    maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png && notify-send -t 200 "Copy screenshot to clipboard."
+
+F7
+    recordAudioToggle
+
+# 
+# Basic Applications
+#
+
+super + space
+    dmenu_run
+super + Return
+    $TERMINAL
+
+super + a
+    firefox
+
+super + m
+    $TERMINAL -e ncmpcpp
+
