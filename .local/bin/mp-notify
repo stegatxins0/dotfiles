@@ -1,0 +1,3 @@
+#!/bin/sh
+
+notify-send "$(mpc | awk 'FNR==3 {print}'  | cut -f 3-9 | awk '{ print substr($0, index($0,$3)) }')"

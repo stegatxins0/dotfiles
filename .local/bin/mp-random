@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ "$(mpc | awk 'FNR==3 {print}'  | cut -f 3-9 | awk '{print $6}')" == on ] && mpc random off || mpc random on

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ $(bspc query -D -d next.occupied --names) == H ] && \
+    bspc desktop -f $(bspc query -D -d .occupied | head -n 1) || \
+    bspc desktop -f next.occupied
