@@ -6,9 +6,9 @@
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/maimpick
 
 case "$(printf "a selected area (local)\\na selected area (copy)\\na selected area (upload)\\ncurrent window (copy)\\nocr (japanese)\\nocr (english)\\nocr (japanese vertical)" | dmenu -l 7 -i -p "Screenshot which area?")" in
-    "a selected area (local)") maim -s ~/screenshot/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
-	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+    "a selected area (local)") maim -s ~/screenshot/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" && notify-send -t 200 "Save screenshot to file.";;
+	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png && notify-send -t 200 "Copy screenshot to clipboard.";;
+	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png && notify-send -t 200 "Copy screenshot to clipboard.";;
     "a selected area (upload)") maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png | xclip -selection clipboard ;;
     "ocr (japanese)") maim -s | ocr jpn ;;
     "ocr (english)") maim -s | ocr eng ;;
