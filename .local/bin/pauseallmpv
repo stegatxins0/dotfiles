@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/pauseallmpv
+# provide argument to play mpv, pause without argument
+# download this https://github.com/wis/mpvSockets/ in $XDG_CONFIG_HOME/mpv/scripts/
+
+for i in $(ls /tmp/mpvSockets/*); do
+	[ $1 ] && echo '{ "command": ["set_property", "pause", false] }' | socat - "$i" || echo '{ "command": ["set_property", "pause", true] }' | socat - "$i";
+done
