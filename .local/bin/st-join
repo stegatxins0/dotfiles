@@ -1,0 +1,20 @@
+#!/bin/sh
+
+read -p "Subtitle extension (ass/srt): " ext
+read -p "Audio track to preserve (index is 0): " audtrack
+[ -d ori ] || mkdir ori
+for vid in *.mkv
+do
+    sub=$(echo "$vid" | sed "s/\..*$/.${ext:-ass}/")
+    if [ -f "$sub" ]; then
+        mv "$vid" "$sub" ori
+        [ -v audtrack ] && \ 
+            ffmpeg -i "ori/$vid" -i "ori/$sub" -map 0 -map -0:s -map -0:a -map 0:a:${audtrack} -c copy -map 1 -c:s:0 ${ext:-ass} -metadata:s:s:0 language=jpn "$vid" || \
+            ffmpeg -i "ori/$vid" -i "ori/$sub" -map 0 -map -0:s -c copy -map 1 -c:s:0 ${ext:-ass} -metadata:s:s:0 language=jpn "$vid"
+    else
+        mv "$vid" ori
+        [ -v audtrack ] && \ 
+            ffmpeg -i "ori/$vid" -map 0 -map -0:s -map -0:a -map 0:a:${audtrack} -c copy "$vid" || \
+            ffmpeg -i "ori/$vid" -map 0 -map -0:s -c copy "$vid"
+    fi
+done

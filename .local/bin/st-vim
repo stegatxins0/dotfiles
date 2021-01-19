@@ -1,0 +1,7 @@
+#!/bin/sh
+read -p "command (:g/OPCN\|EDCN\|Text-cn/d): " cmd
+read -p "subtitle extension (srt, ass): " ext
+for x in *.$ext; 
+do 
+    vim -c " $cmd | w" -c "qa" $x 
+done
