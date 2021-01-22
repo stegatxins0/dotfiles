@@ -1,0 +1,8 @@
+#!/bin/sh
+while read file
+do
+        case "$1" in
+        "d")
+                rm "$file" ;;
+        esac
+done
