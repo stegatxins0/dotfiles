@@ -1,0 +1,13 @@
+# You can add comments to these files with #
+d   /mnt/storage/inbox/download
+t   /mnt/storage/inbox/torrent
+m   /mnt/storage/音楽/
+sc	~/screenshot
+h	~
+s	~/.local/bin
+cf	~/.config
+a   /mnt/storage/日本語/アニメ
+as  /mnt/storage/宿題/2021年
+p   ~/programming
+va  /mnt/storage/宿題/2021年/video-archive
+sh  ~/programming/shousha
