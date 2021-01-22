@@ -1,4 +1,7 @@
-#! /bin/sh
+#!/bin/sh
+
+
+setxkbmap dvorak
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
@@ -16,3 +19,20 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+# autostart
+mpd &
+transmission-daemon &
+xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
+redshift -P -O 3500 &
+fcitx -d &
+dunst &
+transmission-rss -f &
+polybar bar &
+redshift -l 5:100 -t 3500:2000 -r  &
+xwallpaper --zoom ~/.local/share/wallpaper.jpg &
+picom -b &
+mute yes mic &
+mute no mon &
+sb-mpdup &
+twoeyes
