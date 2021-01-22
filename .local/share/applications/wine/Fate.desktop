@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Fate
+Exec=env WINEPREFIX="/home/stegatxins0/Games/fatestay-night" /home/ubuntu/buildbot/runners/wine/lutris-6.0-rc1-x86_64/bin/wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/stegatxins0/Games/fatestay-night/dosdevices/c:/users/stegatxins0/Start\\ Menu/Fate.lnk
+Type=Application
+StartupNotify=true
+Path=/home/stegatxins0/Games/fatestay-night/dosdevices/c:/users/stegatxins0
+Icon=9FD8_Fate.0
+StartupWMClass=fate.exe
