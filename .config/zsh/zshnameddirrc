@@ -1,0 +1,12 @@
+hash -d d=/mnt/storage/inbox/download 
+hash -d t=/mnt/storage/inbox/torrent 
+hash -d m=/mnt/storage/音楽/ 
+hash -d sc=~/screenshot 
+hash -d h=~ 
+hash -d s=~/.local/bin 
+hash -d cf=~/.config 
+hash -d a=/mnt/storage/日本語/アニメ 
+hash -d as=/mnt/storage/宿題/2021年 
+hash -d p=~/programming 
+hash -d va=/mnt/storage/宿題/2021年/video-archive 
+hash -d sh=~/programming/shousha 

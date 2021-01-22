@@ -1,0 +1,13 @@
+# vim: filetype=sh
+alias d="cd /mnt/storage/inbox/download && ls -a" \
+t="cd /mnt/storage/inbox/torrent && ls -a" \
+m="cd /mnt/storage/音楽/ && ls -a" \
+sc="cd ~/screenshot && ls -a" \
+h="cd ~ && ls -a" \
+s="cd ~/.local/bin && ls -a" \
+cf="cd ~/.config && ls -a" \
+a="cd /mnt/storage/日本語/アニメ && ls -a" \
+as="cd /mnt/storage/宿題/2021年 && ls -a" \
+p="cd ~/programming && ls -a" \
+va="cd /mnt/storage/宿題/2021年/video-archive && ls -a" \
+sh="cd ~/programming/shousha && ls -a" \

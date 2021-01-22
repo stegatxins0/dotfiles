@@ -1,5 +1,4 @@
 #!/bin/sh
 
 pidof -x sb-mpdup >/dev/null 2>&1 || sb-mpdup >/dev/null 2>&1 &
-mpc | paste -sd ' ' | sed -r "s/\\[playing\\].*//;s/.*\\[paused\\].*/一時停止/;s/(^.{20}).*/\1.../" 
-
+mpc | paste -sd ' ' | sed -r "s/volume\:\ .*/一時停止/;s/\\[playing\\].*//;s/.*\\[paused\\].*/一時停止/;s/.* - //;s/(^.{20}).*/\1.../" 

@@ -57,20 +57,23 @@ super + shift + {Left,Right}
 super + Right
     mpc toggle
 
-super + shift + Down
-    mpc pause; pauseallmpv
-    
-super + shift + Up
-    pauseallmpv false
+super + shift + {Up, Down}
+    mpc volume {+,-}5
 
-super + alt + Left
-    mpc repeat; mp-notify
+# super + shift + Down
+#     mpc pause; pauseallmpv
+#     
+# super + shift + Up
+#     pauseallmpv false
 
-super + alt + Down
-    mpc single; mp-notify
-
-super + alt + Right
-    mp-random; mp-notify 
+# super + alt + Left
+#     mpc repeat; mp-notify
+# 
+# super + alt + Down
+#     mpc single; mp-notify
+# 
+# super + alt + Right
+#     mp-random; mp-notify 
 
 #
 # Japanese
@@ -78,10 +81,7 @@ super + alt + Right
 super + Tab
     fcitx-remote -t; polybar-msg hook im 1
 
-Print
-    maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png | xclip -selection clipboard ;;
-
-Super + Print
+F8
     dm-screenshot
 
 F6
@@ -100,8 +100,25 @@ super + Return
     $TERMINAL
 
 super + a
-    firefox
+    qutebrowser
 
 super + m
     $TERMINAL -e ncmpcpp
 
+super + BackSpace
+    slock
+
+F12
+    mute toggle mic
+
+super + p
+    passmenu
+
+super + shift + m
+    $TERMINAL -e youtube-viewer
+
+super + i
+    $TERMINAL -e nmtui
+
+super + n
+    $TERMINAL -e newsboat

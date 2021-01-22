@@ -34,4 +34,9 @@ alias \
 alias \
 	magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
-    config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+    config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' \
+    generatepass='gpg --gen-random --armor 1 14 | xclip -selection clipboard' \
+    bmdirs='less ~/.config/zsh/bm-dirs'
+
+se() { du -a ~/.local/bin/* ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+vf() { fzf | xargs -r -I % $EDITOR % ;}

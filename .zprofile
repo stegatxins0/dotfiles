@@ -21,7 +21,6 @@ export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
-export TERM=rxvt #fix ssh
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx
-
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

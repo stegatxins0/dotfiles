@@ -19,8 +19,8 @@ font-1 = HackNerdFont:pixelsize=16;
 font-2 = NotoColorEmoji:fontformat=truetype:scale=16:antialias=false;
 font-3 = IPAGothic:fontformat=truetype:pixelsize=16:antialias=false;
 enable-ipc = true
-modules-left = bspwm title music
-modules-right = volume im cpu disk internet battery clock
+modules-left = bspwm music
+modules-right = volume im cpu disk internet microphone battery clock
 separator = " " 
 
 [module/bspwm]
@@ -35,7 +35,7 @@ initial = 1
 
 [module/music]
 type = custom/ipc
-hook-0 = sb-bracket sb-music 1
+hook-0 = sb-bracket sb-music 2
 initial = 1
 
 [module/volume]
@@ -45,12 +45,12 @@ initial = 1
 
 [module/cpu]
 type = custom/script
-exec = sb-bracket sb-cpu 1
+exec = sb-bracket sb-cpu 2
 interval = 10
 
 [module/disk]
 type = custom/script
-exec = sb-bracket sb-disk 2
+exec = sb-bracket sb-disk 1
 interval = 60
 
 [module/torrent]
@@ -65,7 +65,7 @@ interval = 1
 
 [module/internet]
 type = custom/script
-exec = sb-bracket sb-internet 1
+exec = sb-bracket sb-internet 2
 interval = 5
 
 [module/battery]
@@ -75,11 +75,16 @@ interval = 5
 
 [module/clock]
 type = custom/script
-exec = sb-bracket sb-clock 1
+exec = sb-bracket sb-clock 2
 interval = 60
 
 [module/im]
 type = custom/ipc
 hook-0 = sb-bracket sb-im 1
+initial = 1
+
+[module/microphone]
+type = custom/ipc
+hook-0 = sb-bracket sb-microphone 1
 initial = 1
 ; vim:ft=dosini
