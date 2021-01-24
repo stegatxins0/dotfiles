@@ -1,0 +1,53 @@
+#!/usr/bin/python
+
+import re
+import sys
+import base64
+import requests
+session = requests.session()
+session.headers.update(
+    {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) \
+            Gecko/20100101 Firefox/10.0"
+    }
+)
+def decodeURL(url1, url2, protocol, audiohost, server):
+    url2 = protocol + "//" + server + "/player-mp3-highHandler.php?path=" + url2;
+    url1 = protocol + "//" + audiohost + "/mp3/" + base64.b64decode(url1).decode("utf-8", "strict")
+    return url1, url2
+def generateURLS(results):
+    audio = re.findall(r'var pronunciations = \[([\w\W\n]*?)\];', results)
+    if not audio:
+        return []
+    audio = audio[0]
+    data = re.findall('Japanese' + r'.*?Pronunciation by (?:<a.*?>)?(\w+).*?class="lang_xx"\>(.*?)\<.*?,.*?,.*?,.*?,\'(.+?)\',.*?,.*?,.*?\'(.+?)\'', audio)     
+    if data:
+        server = re.search(r"var _SERVER_HOST=\'(.+?)\';", results).group(1)
+        audiohost = re.search(r'var _AUDIO_HTTP_HOST=\'(.+?)\';', results).group(1)
+        protocol = 'https:'
+        urls = []
+        for datum in data:
+            url1, url2 = decodeURL(datum[2],datum[3],protocol, audiohost, server)
+            urls.append([datum[0],datum[1], url1, url2])
+        return urls
+    else:
+        return []
+def forvo_search(query_gen):
+    try:
+        html = session.get(query_gen).text
+    except:
+        print('The Forvo Dictionary could not be loaded, please confirm that your are connected to the internet and try again. ')
+        return []
+    results = html
+    return generateURLS(results)
+
+
+def search(term):
+    langShortCut = 'ja'
+    GOOGLE_SEARCH_URL = "https://forvo.com/word/◳t/#" + langShortCut
+    query = GOOGLE_SEARCH_URL.replace('◳t', re.sub(r'[\/\'".,&*@!#()\[\]\{\}]', '', term))
+    return forvo_search(query)
+
+for x in search(sys.argv[1]):
+    print(x[0] + ' ' + x[1] + ' [' + x[2] + ']')
+print(sys.argv[1])

@@ -1,0 +1,64 @@
+#!/bin/sh
+ankilocation="/home/stegatxins0/.local/share/Anki2/User 1/collection.media"
+template=${1-"# ------ VOCABULARY ------\n\n# ------ SENTENCE ------\n\n# ------ SHORT DEFINITION ------\n\n# ------ DICTIONARY DEFINITION ------\n\n# ------ IMAGE DEFINITION ------\n\n# ------ IMAGE ------\n\n# ------ SENTENCE AUDIO ------\n\n# ------ OPTIONS ------\nVOCAB=Y\nAUDIO="}
+tmpfile=$(mktemp /tmp/createjpXXXXXX)
+echo -e $template >> $tmpfile
+$EDITOR $tmpfile
+vocab=$(awk '/- VOCABULARY -/,/- SENTENCE -/' $tmpfile | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+vocab=${vocab%<br>}
+[ -z $vocab ] && exit
+sentence=$(awk '/- SENTENCE -/,/- SHORT DEFINITION -/' $tmpfile | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+sentence=${sentence%<br>}
+shortdefinition=$(awk '/- SHORT DEFINITION -/,/- DICTIONARY DEFINITION -/' $tmpfile | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+shortdefinition=${shortdefinition%<br>}
+dictionarydefinition=$(awk '/- DICTIONARY DEFINITION -/,/- IMAGE DEFINITION -/' $tmpfile | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+dictionarydefinition=${dictionarydefinition%<br>}
+vocabyes=$(grep -A2 OPTIONS $tmpfile | grep VOCAB | sed "s/VOCAB=//" | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+vocabyes=${vocabyes%<br>}
+audioyes=$(grep -A2 OPTIONS $tmpfile | grep AUDIO | sed "s/AUDIO=//" | sed "s/#.*//;/^$/d;s/$/<br>/" | paste -sd "")
+audioyes=${audioyes%<br>}
+# media
+sentenceaudio=$(awk '/- SENTENCE AUDIO -/,/- OPTIONS -/' $tmpfile | sed "s/#.*//;/^$/d")
+image=$(awk '/- IMAGE -/,/- SENTENCE AUDIO -/' $tmpfile | sed "s/#.*//;/^$/d")
+imagedefinition=$(awk '/- IMAGE DEFINITION -/,/- IMAGE -/' $tmpfile | sed "s/#.*//;/^$/d")
+[ -f "$sentenceaudio" ] && mv "$sentenceaudio" "$ankilocation" && name_sentenceaudio="[sound:$(echo $sentenceaudio | sed 's/.*\///')]"
+
+[ -f "$image" ] && mv "$image" "$ankilocation" && name_image="<img src=$(echo $image | sed 's/.*\///')>"
+[ -f "$imagedefinition" ] && mv "$imagedefinition" "$ankilocation" && name_imagedefinition="<img src=$(echo $imagedefinition | sed 's/.*\///')>"
+wordaudio=$(forvodl $vocab | fzf --bind "space:execute-silent(echo {} | sed 's/.*\[http/http/;s/.$//' | xargs -I % sh -c 'getmedia % play')" | sed 's/.*\[http/http/;s/.$//' | xargs -I % sh -c "getmedia % get")
+[ -f "$wordaudio" ] && mv "$wordaudio" "$ankilocation" && name_wordaudio="[sound:$(echo $wordaudio | sed 's/.*\///')]"
+ echo $dictionarydefinition
+curl localhost:8765 -X POST -d "{
+    \"action\": \"addNote\",
+    \"version\": 6,
+    \"params\": {
+        \"note\": {
+            \"deckName\": \"🍕日本語::🥇日本語\",
+            \"modelName\": \"日本語\",
+            \"fields\": {
+                \"単語\": \"$vocab\",
+                \"例文\": \"$sentence\",
+                \"音声か\": \"$audioyes\",
+                \"単語か\": \"$vocabyes\",
+                \"意味\": \"$shortdefinition\",
+                \"辞書の定義\": \"$dictionarydefinition\",
+                \"単語音声\": \"$name_wordaudio\",
+                \"例文音声\": \"$name_sentenceaudio\",
+                \"意味の画像\": \"$name_imagedefinition\",
+                \"画像\":\"$name_image\"
+            },
+            \"options\": {
+                \"allowDuplicate\": true,
+                \"duplicateScope\": \"deck\",
+                \"duplicateScopeOptions\": {
+                    \"deckName\": \"Default\",
+                    \"checkChildren\": false
+                }
+            },
+            \"tags\": [
+                \"kindle\"
+            ]
+        }
+    }
+}"
+rm $tmpfile
