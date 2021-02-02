@@ -9,7 +9,7 @@ case "$1" in
 esac
 inputsubject="${2:-justtotriggerthehelpmessage}"
 description="${3:-$inputsubject}"
-date="$(date -d "${4:-$(date)}" "+%b %d %Y")"
+date="$(date -d "${4:-$(date "+%b %d %Y")}" "+%b %d %Y")"
 archivefile="/home/stegatxins0/programming/assignment/archive.md"
 archivefile="/home/stegatxins0/programming/assignment/ea1a0202e19c4e09b014007aff24f8b6/archive.md"
 
@@ -30,18 +30,19 @@ case "$inputsubject" in
     "art") subject="Art" ;;
     "phil") subject="Philosophy" ;;
     "sej") subject="Sejarah" ;;
-    "lit") subject="English Literature" ;;
+    "sc") subject="Spiritual Circle" ;;
+    "lit") subject="Introduction to English Literature" ;;
     "others") subject="Others" ;;
     *) echo "$helpsubject"; exit ;;
 esac
 lbrysubject="$date | $subject | $description"
-lbrydescription="The $subject online class is recorded on $date, it is about $(echo $description | sed 's/[A-Z]/\L&/g;')."
+lbrydescription="This $subject online class was recorded on $date, it is about $(echo $description | sed 's/[A-Z]/\L&/g;')."
 lbryname="$(echo $lbrysubject | sed 's/[A-Z]/\L&/g;s/ | /-/g;s/ /-/g')"
 subjectgit="$(echo $subject | sed 's/[A-Z]/\L&/g;s/ | /-/g;s/ /-/g')"
 # link=$(echo "https://odysee.com/$lbryname" | sed "s/\//\\\\\//g")
 filepath="$(readlink -f $videofile)"
 # youtube-upload --open-link --title="$youtubesubject" --description="$youtubedescription" --privacy="unlisted" $videofile
-link="$(lbrynet publish --name="$lbryname" --bid="0.001" --file_path="$filepath" --title="$lbrysubject" --description="$lbrydescription" --validate_file --optimize_file | grep permanent_url | sed 's/.*": "//;s/",$//;' )"
+link="$(lbrynet publish --name="$lbryname" --bid="0.001" --file_path="$filepath" --title="$lbrysubject" --description="$lbrydescription" | grep permanent_url | sed 's/.*": "//;s/",$//;' )"
 odyseelink=$(echo $link | sed "s/lbry:\/\//https:\/\/odysee.com\//;s/\//\\\\\//g")
 lbrylink=$(echo $link | sed "s/lbry:\/\//https:\/\/open.lbry.com\//;s/\//\\\\\//g")
 subjecttable="| $date | $description | [Odysee]($odyseelink) \/ [Lbry]($lbrylink) |"

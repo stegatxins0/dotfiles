@@ -83,5 +83,11 @@ filextype *.xcf gimp %f 2>/dev/null &
 
 set vifminfo=dhistory,chistory,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
-command extract uz "%f" &>/dev/null &
+command extract uz %f &>/dev/null &
+command dragon dragon-drag-and-drop -x %f &>/dev/null &
+command dragonall dragon-drag-and-drop -a -x %f &>/dev/null &
 nnoremap ex :extract<CR>
+nnoremap rd :dragon<CR>
+nnoremap ra :dragonall<CR>
+" command vifmcd $TERM
+" nnoremap cd :vifmcd<bar> :q<CR>

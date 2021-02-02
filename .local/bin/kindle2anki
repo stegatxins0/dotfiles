@@ -1,10 +1,12 @@
 #!/bin/bash
 # mycliplocation="./My Clippings.txt"
+mycliplocation="/run/media/stegatxins0/Kindle/documents/My Clippings.txt"
+vocabdblocation="/run/media/stegatxins0/Kindle/system/vocabulary/vocab.db"
 # vocabdblocation="./vocab.db"
-mycliplocation=$1
-vocabdblocation=$2
-archivefolder="~/.kindle-archive"
-
+# mycliplocation=$1
+# vocabdblocation=$2
+archivefolder="~/programming/kindle/kindle-archive"
+[ -d $archivefolder ] && mkdir $archivefolder
 cp "$mycliplocation" "$archivefolder"
 for word in $(grep -B1 '==========' "$mycliplocation" | sed "/==========/d;/--/d;/^$/d;s/[ \t]*$//" | awk '!seen[$0]++')
 do
@@ -12,3 +14,4 @@ do
     sentence=$(sqlite3 $vocabdblocation "SELECT usage FROM lookups WHERE instr(word_key,'$word') > 0;" | sed "s/$/\\\n/")
     createjp "# ------ VOCABULARY ------\n$word\n# ------ SENTENCE ------\n$sentence\n# ------ SHORT DEFINITION ------\n\n# ------ DICTIONARY DEFINITION ------\n\n# ------ IMAGE DEFINITION ------\n\n# ------ IMAGE ------\n\n# ------ SENTENCE AUDIO ------\n\n# ------ OPTIONS ------\nVOCAB=Y\nAUDIO="
 done
+rm "$mycliplocation"

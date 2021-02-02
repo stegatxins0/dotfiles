@@ -1,5 +1,6 @@
 hash -d d=/mnt/storage/inbox/download 
 hash -d t=/mnt/storage/inbox/torrent 
+hash -d ra=/mnt/storage/inbox/class 
 hash -d m=/mnt/storage/音楽/ 
 hash -d sc=~/screenshot 
 hash -d h=~ 
@@ -9,4 +10,4 @@ hash -d a=/mnt/storage/日本語/アニメ
 hash -d as=/mnt/storage/宿題/2021年 
 hash -d p=~/programming 
 hash -d va=/mnt/storage/宿題/2021年/video-archive 
-hash -d sh=~/programming/shousha 
+hash -d so=~/programming/shousha 

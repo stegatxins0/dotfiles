@@ -12,3 +12,13 @@ image/gif=img.desktop;
 application/rss+xml=rss.desktop
 video/x-matroska=video.desktop
 inode/directory=file.desktop
+x-scheme-handler/lbry=lbry.desktop
+x-scheme-handler/msteams=teams.desktop
+text/html=browser.desktop
+x-scheme-handler/http=browser.desktop
+x-scheme-handler/https=browser.desktop
+x-scheme-handler/about=browser.desktop
+x-scheme-handler/unknown=browser.desktop
+
+[Added Associations]
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;

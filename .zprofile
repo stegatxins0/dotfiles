@@ -5,7 +5,6 @@ export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
 # Default programs
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="firefox"
 
 # Clean up
 export XDG_CONFIG_HOME="$HOME/.config"

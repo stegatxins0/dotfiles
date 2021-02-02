@@ -5,7 +5,8 @@ read -p "Audio track to preserve (index is 0): " audtrack
 [ -d ori ] || mkdir ori
 for vid in *.mkv
 do
-    sub=$(echo "$vid" | sed "s/\..*$/.${ext:-ass}/")
+    # sub=$(echo "$vid" | sed "s/\..*$/.${ext:-ass}/")
+    sub=$(echo "$vid" | sed "s|\(.*\)\..*|\1|;s/$/.${ext:-ass}/")
     if [ -f "$sub" ]; then
         mv "$vid" "$sub" ori
         [ -v audtrack ] && \ 

@@ -99,8 +99,8 @@ super + space
 super + Return
     $TERMINAL
 
-super + a
-    qutebrowser
+# super + a
+#     qutebrowser
 
 super + m
     $TERMINAL -e ncmpcpp
@@ -122,3 +122,41 @@ super + i
 
 super + n
     $TERMINAL -e newsboat
+
+super + shift + f
+    bspc rule -a float
+
+super + {t,s,f}
+	bspc node -t {tiled,floating,fullscreen}
+
+super + apostrophe
+    $TERMINAL -e vifm
+
+super + comma
+    $TERMINAL -e tremc
+
+super + shift + t
+    zathura /mnt/storage/3K1.pdf
+
+super + shift + c
+    google-chrome-stable --app="https://meet.google.com/"
+
+super + c
+    google-chrome-stable --app="https://classroom.google.com/"
+
+super + a
+    librewolf
+
+super + shift + e
+    anki
+super + e
+    obs
+
+super + period
+    element-desktop
+
+super + shift + period
+    discord
+
+super + shift + n
+    $TERMINAL -e neomutt

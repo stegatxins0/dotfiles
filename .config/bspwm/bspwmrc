@@ -19,6 +19,7 @@ bspc config window_gap          12
 # autostart
 setxkbmap dvorak &
 pgrep -x sxhkd > /dev/null || sxhkd &
+# sxhkd &
 sb-musicup &
 mpd &
 transmission-daemon &
@@ -27,6 +28,7 @@ fcitx -d &
 dunst &
 transmission-rss -f &
 launch-polybar &
+# polybar bar &
 redshift -l 5:100 -t 4000:3000 -r  &
 xwallpaper --zoom ~/.local/share/wallpaper.jpg &
 picom -b &
@@ -34,4 +36,6 @@ mute yes mic &
 mute no mon &
 twoeyes &
 pgrep bs-swallow || bs-swallow &
+# bs-swallow &
 shortcuts &
+remaps &

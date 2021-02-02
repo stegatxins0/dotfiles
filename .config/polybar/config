@@ -20,7 +20,7 @@ font-2 = NotoColorEmoji:fontformat=truetype:scale=16:antialias=false;
 font-3 = IPAGothic:fontformat=truetype:pixelsize=16:antialias=false;
 enable-ipc = true
 modules-left = bspwm music
-modules-right = volume im cpu disk internet microphone battery clock
+modules-right = volume im cpu disk internet microphone battery mailbox clock
 separator = " " 
 
 [module/bspwm]
@@ -87,4 +87,10 @@ initial = 1
 type = custom/ipc
 hook-0 = sb-bracket sb-microphone 1
 initial = 1
+
+[module/mailbox]
+type = custom/script
+exec = sb-bracket sb-mailbox 1
+interval = 600
+
 ; vim:ft=dosini
