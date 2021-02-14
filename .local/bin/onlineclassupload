@@ -44,7 +44,7 @@ filepath="$(readlink -f $videofile)"
 # youtube-upload --open-link --title="$youtubesubject" --description="$youtubedescription" --privacy="unlisted" $videofile
 link="$(lbrynet publish --name="$lbryname" --bid="0.001" --file_path="$filepath" --title="$lbrysubject" --description="$lbrydescription" | grep permanent_url | sed 's/.*": "//;s/",$//;' )"
 odyseelink=$(echo $link | sed "s/lbry:\/\//https:\/\/odysee.com\//;s/\//\\\\\//g")
-lbrylink=$(echo $link | sed "s/lbry:\/\//https:\/\/open.lbry.com\//;s/\//\\\\\//g")
+lbrylink=$(echo $link | sed "s/lbry:\/\//https:\/\/m.subby.dev\/?redirect=lbry:\/\//;s/\//\\\\\//g")
 subjecttable="| $date | $description | [Odysee]($odyseelink) \/ [Lbry]($lbrylink) |"
 datetable="| $subject | $date | $description | [Odysee]($odyseelink) \/ [Lbry]($lbrylink) |"
 grep "### $subject" $archivefile || \

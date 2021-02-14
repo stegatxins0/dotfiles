@@ -1,3 +1,4 @@
 #!/bin/sh
 
-pacmd list-sources | grep muted | sed "1d;s/.*muted\:\ no.*/%{F#FF0000}話中%{F-}/;s/.*muted\:\ yes.*/消音/"
+# pacmd list-sources | grep muted | sed "1d;s/.*muted\:\ no.*/%{F#FF0000}話中%{F-}/;s/.*muted\:\ yes.*/消音/"
+pacmd list-sources | grep -A 10 "noecho_mic" | grep "muted: " | sed "s/.*muted\:\ no.*/%{F#FF0000}話中%{F-}/;s/.*muted\:\ yes.*/消音/"

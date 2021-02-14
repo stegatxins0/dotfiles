@@ -1,0 +1,3 @@
+#!/bin/sh
+
+readlink -f "$1" | sed "s/\/home\/stegatxins0/stegatxins0.github.io/" | xclip -selection clipboard || echo "Incorrect file"

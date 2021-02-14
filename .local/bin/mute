@@ -3,12 +3,13 @@
 case "$1" in
     "yes") mute=1 ;;
     "no") mute=0 ;;
-    "toggle") mute=$(pacmd list-sources | grep muted | sed "1d;s/.*muted\:\ no.*/1/;s/.*muted\:\ yes.*/0/"); ;;
+    # "toggle") mute=$(pacmd list-sources | grep muted | sed "1d;s/.*muted\:\ no.*/1/;s/.*muted\:\ yes.*/0/"); ;;
+    "toggle") mute=$(pacmd list-sources | grep -A 10 "noecho_mic" | grep "muted: " | sed "s/.*muted\:\ no.*/1/;s/.*muted\:\ yes.*/0/") ;;
 esac
 
 case "$2" in
     "all") pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} $mute ;;
-    "mic") pacmd set-source-mute 1 $mute ;;
+    "mic") pacmd set-source-mute noecho_mic $mute ;;
     # too lazy to rewrite to make toggle for monitor working
     "mon") pacmd set-source-mute 0 $mute ;;
 esac

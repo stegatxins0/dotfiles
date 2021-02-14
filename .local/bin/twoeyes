@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# short break (seconds)
+sbreak=20
+# long break (seconds)
+lbreak=60
+# time between break (minutes)
+tbreak=20
+# notification before break (seconds)
+noti=15
+# total round before short break
+round=5
+# suspend time (minutes)
+suspendtime=60
+
+function freezescr(){
+	inputs='$(xinput --list --id-only | sort -hr | tr "\n" " ")'
+    for i in "${inputs[@]}"; do
+        echo $i
+        xinput --disable $i
+    done
+	xset dpms force off
+	sleep $time
+    for i in "${inputs[@]}"; do xinput --enable $i; done
+	xset dpms force on
+}
+
+suspendtime="$(expr $suspendtime \* 60)"
+tbreak="$(expr $tbreak \* 60)"
+
+function mainf(){
+	cur_round=0
+	while [ $cur_round -le $round ];
+	do
+	    sleep $tbreak
+	    time=$sbreak
+        notify-send "Short break incoming."
+        sleep $noti
+	    freezescr
+	    cur_round="$(expr $cur_round + 1)"
+	done
+    sleep $tbreak
+	time=$lbreak
+    notify-send "Long break incoming. LONG BREAK incoming"
+    sleep $noti
+    freezesrc
+	mainf
+}
+mainf

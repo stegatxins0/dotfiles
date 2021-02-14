@@ -36,7 +36,8 @@ alias \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
     config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' \
     generatepass='gpg --gen-random --armor 1 14 | xclip -selection clipboard' \
-    bmdirs='less ~/.config/zsh/bm-dirs'
+    bmdirs='less ~/.config/zsh/bm-dirs' \
+    obscam='sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="OBS Cam" exclusive_caps=1'
 
 se() { du -a ~/.local/bin/* ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
 vf() { fzf | xargs -r -I % $EDITOR % ;}

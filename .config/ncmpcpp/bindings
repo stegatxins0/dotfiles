@@ -74,13 +74,13 @@ def_key "U"
   update_database
 
 def_key "s"
-  reset_search_engine
+ reset_search_engine
 
 def_key "s"
-  show_search_engine
+ show_search_engine
 
-def_key "f"
-  show_browser
+# def_key "f"
+#  show_browser
 
 def_key "f"
   change_browse_mode

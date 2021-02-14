@@ -14,6 +14,7 @@ export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
 
 # Fcitx
 export GTK_IM_MODULE='fcitx'

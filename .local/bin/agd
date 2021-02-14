@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# sed -i "/[Aegisub Project Garbage]/d;/Last Style Storage:/d;/Audio File:/d;/Video File:/d;/Video AR Mode:/d;/Video AR Value:/d;/Video Zoom Percent:/d;/Scroll Position:/d;/Active Line:/d;/Video Position:/d" $1
+sed -i "/\[Aegisub Project Garbage\]/,/Video Position:/d;s/PlayResX:.*/PlayResX: 1920/;s/PlayResY.*/PlayResY: 1080/" $1

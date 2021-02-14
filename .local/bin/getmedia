@@ -1,0 +1,12 @@
+#!/bin/sh
+
+link=$1
+action=$2
+
+tmpfile="/tmp/kindank.forvo.$(echo "$link" | awk -F "/" '{print $NF}')"
+case "$action" in
+	"play") [ -f "$tmpfile" ] || curl "$link" >> $tmpfile; mpg123 $tmpfile ;;
+	"get") [ -f "$tmpfile" ] || curl "$link" >> $tmpfile; echo $tmpfile ;;
+	"delete") [ -f "$tmpfile" ] && rm "$tmpfile"  ;;
+	"deleteall") rm /tmp/kindank.forvo.*  ;;
+esac

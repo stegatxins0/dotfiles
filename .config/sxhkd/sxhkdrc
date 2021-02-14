@@ -150,7 +150,7 @@ super + a
 super + shift + e
     anki
 super + e
-    obs
+    obs --use-fake-ui-for-media-stream
 
 super + period
     element-desktop
@@ -160,3 +160,21 @@ super + shift + period
 
 super + shift + n
     $TERMINAL -e neomutt
+
+super + v
+    pavucontrol
+
+XF86MonBrightnessDown
+    xbacklight -dec 10
+
+XF86MonBrightnessUp
+    xbacklight -inc 10
+
+F10
+    xmodmap -e "pointer = 3 2 1"
+
+F9
+    xmodmap -e "pointer = 1 2 3"
+
+super + d
+    notify-send "GMT: $(TZ='GMT' date "+%b %d %I:%M%p")   EST: $(TZ='EST' date "+%b %d %I:%M%p")"

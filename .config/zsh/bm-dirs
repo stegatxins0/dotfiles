@@ -7,8 +7,9 @@ sc	~/screenshot
 h	~
 s	~/.local/bin
 cf	~/.config
-a   /mnt/storage/日本語/アニメ
-as  /mnt/storage/宿題/2021年
+an   /mnt/storage/日本語/アニメ
+# as  /mnt/storage/宿題/2021年
+as  ~/assignment/2021
 p   ~/programming
 va  /mnt/storage/宿題/2021年/video-archive
 so  ~/programming/shousha

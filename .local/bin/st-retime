@@ -5,6 +5,6 @@ read -p "Seconds to delay (in seconds): " delaytime
 [ ! -d orisub ] && mkdir orisub
 for sub in *.$ext
 do
-    mv $sub orisub
-    ffmpeg -itsoffset $delaytime -i orisub/$sub -c copy $sub
+    mv "$sub" orisub
+    ffmpeg -itsoffset $delaytime -i "orisub/$sub" -c copy "$sub"
 done
