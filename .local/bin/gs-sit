@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# OPTIONS
+newfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jpdailylog.md"
+plotfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/img/ankistat.png"
+tablefile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jptablelog.md"
+allfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jpalllog.md"
+# END OPTIONS
+
+
+day="$(gs-jap tod $1 | sed "s/$/\\\n/;s/\//\\\\\//g;s/\[/\\\\[/;s/\]/\\\\]/;s/^/- /" | paste -sd '' )" 
+# week="$(gs-jap week $1 | sed "/Watch **0 episodes** of anime **without Japanese subtitles**\|Watch **0 episodes** of anime **with Japanese subtitles**\|Read **0 chapters** of manga\|Read **0 chapters** of novel\|Read **0 characters** in visual novel\|Added **0 new cards**/d;s/$/\\\n/;s/\//\\\\\//g;s/\[/\\\\[/;s/\]/\\\\]/;s/^/- /" | paste -sd '' )"
+week="$(gs-jap week $1 | sed "/Watch \*\*0 episodes\*\* of anime \*\*without Japanese subtitles\*\*\|Watch \*\*0 episodes\*\* of anime \*\*with Japanese subtitles\*\*\|Read \*\*0 chapters\*\* of manga\|Read \*\*0 chapters\*\* of novel\|Read \*\*0 characters\*\* in visual novel\|Added \*\*0 new cards\*\*/d;s/$/\\\n/;s/\//\\//g;s/\[/\[/;s/\]/\]/;s/^/- /" | paste -sd '')"
+table="$(gs-jap bet $1)"
+cp "/home/stegatxins0/programming/stegatxins0.github.io/source/template/jpdailylog.md" "$newfile"
+sed -i "/^## What have I done today?$/a**Last Update**\: $(date -d $(echo $1 | sed "s|\(.*\)\..*|\1|") "+%a, %b %d %Y")\n\n$day" $newfile
+sed -i "/^## What have I done this week?$/a$week" $newfile
+sed -i "/|---/a$(echo $table | sed "s/None//g")" $tablefile
+# sed -i "0,/### 2021/i### $(echo $1 | sed "s|\(.*\)\..*|\1|")\n$day" $allfile
+sed -i "0,/### 202/s//### $(echo $1 | sed "s|\(.*\)\..*|\1|")\n$day\n\n###202/" $allfile
+# for x in $(cat uu)
+# do
+# echo "\n### $x" | sed "s|\(.*\)\..*|\1|" >> u
+# gs-jap tod $x >> u
+# done

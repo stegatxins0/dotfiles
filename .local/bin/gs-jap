@@ -1,0 +1,299 @@
+#!/usr/bin/python
+import sys
+import yaml
+import datetime
+import matplotlib.pyplot as plt
+import matplotlib.transforms
+
+def search(searchvalue, engname, japname, alias):
+    reslist = []
+    if engname:
+        reslist.append(engname.lower())
+    if japname:
+        reslist.append(japname)
+    for x in alias:
+        if x:
+            reslist.append(x.lower()) 
+    for x in reslist:
+        if searchvalue == x:
+            return True
+
+def search_all(all_list, searchvalue):
+    for cat in all_list:
+        engname = cat["english name"]
+        japname = cat["japanese name"]
+        alias = cat["alias"]
+        if searchvalue:
+            if search(searchvalue.lower(), engname, japname, alias):
+                return cat 
+
+def search_spec(listname, value):
+    with open(r'/home/stegatxins0/programming/stegatxins0.github.io/japanese-log/animelist.yaml') as animelist:
+        animelist_list = yaml.load(animelist, Loader=yaml.FullLoader)
+        return search_all(animelist_list[listname], value)
+
+
+    
+# with open(r'./2020/2020-12-28.yaml') as file:
+def gettoday(ttype):
+    anime_withoutsubs_count = None
+    anime_withsubs_count = None
+    manga_count = None
+    vn_count = None
+    novel_count = None
+    new_cards_count = None
+    reps = False
+    with open(sys.argv[2]) as file:
+        day_list = yaml.load(file, Loader=yaml.FullLoader)
+        datet = sys.argv[2].rsplit( ".", 1 )[ 0 ]
+        try: anime_nosubs = day_list["listening"]["anime w/o subs"]
+        except KeyError: anime_nosubs = None
+        try: anime_withsubs = day_list["reading"]["anime with subs"]
+        except KeyError: anime_withsubs = None
+        try: manga = day_list["reading"]["manga"]
+        except KeyError: manga = None
+        try: vn = day_list["reading"]["visual novel"] 
+        except KeyError: vn = None
+        try: novel = day_list["reading"]["novel"]
+        except KeyError: novel = None
+        try: new_cards = day_list["reps"]["new cards"]
+        except KeyError: new_cards = None
+        try: reps = day_list["reps"]["reps"]
+        except KeyError: reps = None
+        try: pitch = day_list["pitch accent"]
+        except KeyError: pitch = None
+        if anime_nosubs:
+            for x in anime_nosubs:
+                listres =  search_spec("anime", x["series"])
+                if listres:
+                    anime_withoutsubs_count = len(x["episodes"])
+                    if ttype == True: print("Watched **episode " + ", ".join(str(y) for y in x["episodes"]) + "** of Season " + str(x["season"]) + " of ["+ listres["english name"] + "](" + listres["mal"] + ") **without Japanese subtitles**" )
+                    try: 
+                        if x["complete"] == True:
+                            if ttype == True: print("**Finished watching** ["+ listres["english name"] + "](" + listres["mal"] + ") **without Japanese subtitles**" )
+                    except: pass
+                elif x["series"]: 
+                   if ttype == True: print("make sure you update your animelist for anime " + x["series"])
+                   exit
+        if anime_withsubs:
+            for x in anime_withsubs:
+                listres =  search_spec("anime", x["series"])
+                if listres:
+                    anime_withsubs_count = len(x["episodes"])
+                    if ttype == True: print("Watched **episode " + ", ".join(str(y) for y in x["episodes"]) + "** of Season " + str(x["season"]) + " of ["+ listres["english name"] + "](" + listres["mal"] + ") **with Japanese subtitles**" )
+                    try: 
+                        if x["complete"] == True:
+                            if ttype == True: print("**Finished watching** ["+ listres["english name"] + "](" + listres["mal"] + ") **with Japanese subtitles**" )
+                    except: pass
+                elif x["series"]: 
+                   if ttype == True: print("make sure you update your animelist for anime " + x["series"])
+                   exit
+        if vn: 
+            for x in vn:
+                listres =  search_spec("vn", x["series"])
+                if listres:
+                    try:  
+                        vn_count = x["char"]
+                        if ttype == True: print("Read **" + str(x["char"]) + " characters** or **" + str(x["lines"]) + " lines** of [" + listres["english name"] + "](" + listres["vndb"] + ")" )
+                        try:
+                            if x["complete"] == True:
+                                if ttype == True: print("**Finished reading** [" + listres["english name"] + "](" + listres["vndb"] + ")" )
+                        except: pass
+                    except: 
+                        if ttype == True: print("Read **" + str(x["hours"]) + " hours** of [" + listres["english name"] + "](" + listres["vndb"] + ")" )
+                elif x["series"]: 
+                    if ttype == True: print("make sure you update your animelist for vn " + x["series"])
+                    exit
+        if manga: 
+            for x in manga:
+                if not all(x is None for x in x["chapters"]):
+                    manga_count = len(x["chapters"])
+                listres =  search_spec("manga", x["series"])
+                if listres:
+                    if ttype == True: print("Read **chapter " + ", ".join(str(y) for y in x["chapters"]) + "** of volume " + str(x["volume"]) + " [" + listres["english name"] + "](" + listres["mal"] + ") manga" )
+                    try:
+                        if x["complete"] == True:
+                            if ttype == True: print("**Finished reading**  [" + listres["english name"] + "](" + listres["mal"] + ") manga" )
+                    except: pass
+                elif x["series"]: 
+                    if ttype == True: print("make sure you update your animelist for vn" + x["series"])
+                    exit
+        if novel: 
+            for x in novel:
+                if not all(x is None for x in x["chapters"]):
+                    novel_count = len(x["chapters"])
+                listres =  search_spec("novel", x["series"])
+                if listres:
+                    if ttype == True: print("Read **chapter " + ", ".join(str(y) for y in x["chapters"]) + "** of volume " + str(x["volume"]) + " [" + listres["english name"] + "](" + listres["nv"] + ") novel" )
+                    try:
+                        if x["complete"] == True:
+                            if ttype == True: print("**Finished reading**  [" + listres["english name"] + "](" + listres["nv"] + ") manga" )
+                    except: pass
+                elif x["series"]: 
+                    if ttype == True: print("make sure you update your animelist for vn" + x["series"])
+                    exit
+        if new_cards and new_cards != 0:
+            if ttype == True: print("Added **" + str(new_cards) + " new cards**")
+            new_cards_count = new_cards
+        else:
+            if ttype == True: print("*Didn't add any new cards*")
+
+        if pitch and pitch == True:
+            if ttype == True: print("Learnt pitch accent rules")
+
+        if reps and reps == True:
+            if ttype == True: print("Completed Anki reps")
+        else:
+            if ttype == True: print("Didn't complete my anki reps. Streak lost :(")
+    if ttype == False: 
+        texttor = "|" + str(datet) + "|" + str(anime_withoutsubs_count) + "|" + str(anime_withsubs_count) + "|" + str(manga_count) + "|" + str(vn_count) + "|" + str(novel_count) + "|" + str(new_cards_count) + "|" + str(reps) + "|"
+        # texttor = "|" + str(anime_withoutsubs_count) "|" + str(anime_withsubs_count) 
+        # texttor = "|" + str(manga_count)
+        # return "|" + anime_withoutsubs_count "|" + anime_withsubs_count + "|" + manga_count + "|" + vn_count + "|" + novel_count + "|" + new_cards_count + "|" + reps + "|"
+        return texttor
+    # for k, v in day_list.items():
+    #     if ttype == True: print(k, v)
+
+# anime = Anime(4224) # Cowboy Bebop
+# print(Anime.image_url)
+# datetime.strptime(dt_str, '%Y-%m-%d')
+def getweek(ti):
+    datelist = [sys.argv[2].rsplit( ".", 1 )[ 0 ]]
+    while len(datelist) < ti:
+        Previous_Date = datetime.datetime.strptime(datelist[-1], '%Y-%m-%d') - datetime.timedelta(days=1)
+        datelist.append(Previous_Date.strftime("%Y-%m-%d"))
+
+    newlist = []
+    for dat in datelist:
+        with open(r'./' + dat + '.yaml') as file:
+            day_list = yaml.load(file, Loader=yaml.FullLoader)
+        try: new_cards = day_list["reps"]["new cards"]
+        except KeyError: new_cards = None
+        if new_cards:
+            nc = new_cards
+        else:
+            nc = 0
+        newlist.append(nc)
+
+    plt.bar(datelist, newlist, align='center', alpha=0.5)
+    plt.xticks(rotation='vertical')
+    plt.xlabel('Date', fontsize=14)
+    plt.ylabel('New Cards Added', fontsize=14)
+    # font = {'family' : 'normal',
+    #         'weight' : 'normal',
+    #         'size'   : 12}
+    # matplotlib.rc('font', **font)
+    plt.axhline(y = 10, color = 'r', linestyle = '-', label='Target Cards') 
+    plt.title('New Cards Added in the Past Week')
+
+    # plt.show()
+    # plt.gcf().subplots_adjust(bottom=5)
+    plt.savefig("/home/stegatxins0/programming/stegatxins0.github.io/docs/img/ankistat.png", bbox_inches = "tight")
+    ankicards = 0
+    for x in newlist:
+        ankicards = ankicards + x
+    anime_nosubs_ep = 0
+    anime_withsubs_ep = 0
+    manga_chap = 0
+    novel_chap = 0
+    vn_char = 0
+    for dat in datelist:
+        with open(r'./' + dat + '.yaml') as file:
+            day_list = yaml.load(file, Loader=yaml.FullLoader)
+            try: anime_nosubs = day_list["listening"]["anime w/o subs"]
+            except KeyError: anime_nosubs = None
+            try: anime_withsubs = day_list["reading"]["anime with subs"]
+            except KeyError: anime_withsubs = None
+            try: manga = day_list["reading"]["manga"]
+            except KeyError: manga = None
+            try: vn = day_list["reading"]["visual novel"] 
+            except KeyError: vn = None
+            try: novel = day_list["reading"]["novel"]
+            except KeyError: novel = None
+            try: reps = day_list["reps"]["reps"]
+            except KeyError: reps = None
+            if anime_nosubs:
+                for x in anime_nosubs:
+                    listres =  search_spec("anime", x["series"])
+                    if listres:
+                        try: 
+                            anime_nosubs_ep = anime_nosubs_ep + len(x["episodes"])
+                            if x["complete"] == True:
+                                print("**Finished watching** ["+ listres["english name"] + "](" + listres["mal"] + ") **without Japanese subtitles**" )
+                        except: pass
+                    elif x["series"]: 
+                       print("make sure you update your animelist for anime " + x["series"])
+                       exit
+            if anime_withsubs:
+                for x in anime_withsubs:
+                    listres =  search_spec("anime", x["series"])
+                    if listres:
+                        anime_withsubs_ep = anime_nosubs_ep + len(x["episodes"])
+                        try: 
+                            if x["complete"] == True:
+                                print("**Finished watching** Season " + str(x["season"]) + " of ["+ listres["english name"] + "](" + listres["mal"] + ") **with Japanese subtitles**" )
+                        except: pass
+                    elif x["series"]: 
+                       print("make sure you update your animelist for anime " + x["series"])
+                       exit
+            if vn: 
+                for x in vn:
+                    listres =  search_spec("vn", x["series"])
+                    if listres:
+                        try: 
+                            vn_char = vn_char + x["char"]
+                            try:
+                                if x["complete"] == True:
+                                    print("**Finished reading** [" + listres["english name"] + "](" + listres["vndb"] + ")" )
+                            except: pass
+                        except: 
+                            # print("Read " + str(x["hours"]) + " hours of [" + listres["english name"] + "](" + listres["vndb"] + ")" )
+                            pass
+                    elif x["series"]: 
+                        print("make sure you update your animelist for vn " + x["series"])
+                        exit
+            if manga: 
+                for x in manga:
+                    listres =  search_spec("manga", x["series"])
+                    if listres:
+                        try:
+                            manga_chap = manga_chap + (len(x["chapters"]))
+                            if x["complete"] == True:
+                                print("**Finished reading**  [" + listres["english name"] + "](" + listres["mal"] + ") manga" )
+                        except: pass
+                    elif x["series"]: 
+                        print("make sure you update your animelist for vn" + x["series"])
+                        exit
+            if novel: 
+                for x in novel:
+                    listres =  search_spec("novel", x["series"])
+                    if listres:
+                        try:
+                            novel_chap = novel_chap + (len(x["chapters"]))
+                            if x["complete"] == True:
+                                print("**Finished reading  [" + listres["english name"] + "](" + listres["nv"] + ") manga" )
+                        except: pass
+                    elif x["series"]: 
+                        print("make sure you update your animelist for vn" + x["series"])
+
+    print("Watched **" + str(anime_nosubs_ep) + " episodes** of anime **without Japanese subtitles**")
+    print("Watched **" + str(anime_withsubs_ep) + " episodes** of anime **with Japanese subtitles**")
+    print("Read **" + str(manga_chap) + " chapters** of manga")
+    print("Read **" + str(novel_chap) + " chapters** of novel")
+    print("Read **" + str(vn_char) + " characters** in visual novel")
+    print("Added **" + str(ankicards) + " new cards**")
+
+# for x in datelist:
+#     anime_nosubs_ep = 0
+#     anime_withsubs_ep = 0
+#     manga_chap = 0
+#     novel_chap = 0
+#     vn_char = 0
+#     ankicards = 0
+#     getfinish(dat)
+
+if sys.argv[1] == "tod": gettoday(True)
+if sys.argv[1] == "bet": print(gettoday(False))
+if sys.argv[1] == "week": getweek(7)
+# if sys.argv
+    # print("|" + anime_nosubs_ep "|" + anime_withsubs_ep + "|" + manga_chap + "|" + novel_chap + "|" + vn_char + "|" + ankicards + "|" )

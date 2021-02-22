@@ -85,10 +85,16 @@ F8
     dm-screenshot
 
 F6
-    maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png && notify-send -t 200 "Copy screenshot to clipboard."
+    ames -w
 
 F7
-    recordAudioToggle
+    ames -r
+
+# F6
+#     maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png && notify-send -t 200 "Copy screenshot to clipboard."
+
+# F7
+#     recordAudioToggle
 
 # 
 # Basic Applications

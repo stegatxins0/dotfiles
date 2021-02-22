@@ -10,8 +10,8 @@ esac
 inputsubject="${2:-justtotriggerthehelpmessage}"
 description="${3:-$inputsubject}"
 date="$(date -d "${4:-$(date "+%b %d %Y")}" "+%b %d %Y")"
-archivefile="/home/stegatxins0/programming/assignment/archive.md"
-archivefile="/home/stegatxins0/programming/assignment/ea1a0202e19c4e09b014007aff24f8b6/archive.md"
+archivefile="/home/stegatxins0/programming/stegatxins0.github.io/docs/onlineclassarchive.md"
+# archivefile="/home/stegatxins0/programming/assignment/ea1a0202e19c4e09b014007aff24f8b6/archive.md"
 
 # subject code
 case "$inputsubject" in
