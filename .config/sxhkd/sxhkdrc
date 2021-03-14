@@ -1,5 +1,7 @@
 # bspwm-specific Hotkeys
 
+super + c
+    gmeet l
 # Change focus
 super + {j,k}
     bspc node --focus {next.local,prev.local}; polybar-msg hook title 1
@@ -9,8 +11,13 @@ super + shift + {j,k}
     bspc node -s {next.local,prev.local}; polybar-msg hook title 1
 
 # Close and kill window
-super + {_,shift + }w
-	bspc node -{c,k}; polybar-msg hook title 1
+# super + {_,shift + }w
+# 	bspc node -{c,k}
+super + shift + w
+    bspc node -k
+
+super + w
+    gmeet c
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -25,8 +32,8 @@ super + q
     bs-last; polybar-msg hook bspwm 1
 
 # Fullscreen toggle
-super + f
-    bspc desktop --layout next; polybar-msg hook title 1
+# super + f
+#     bspc desktop --layout next; polybar-msg hook title 1
 
 # Resize
 super + {h,l}
@@ -144,11 +151,13 @@ super + comma
 super + shift + t
     zathura /mnt/storage/3K1.pdf
 
-super + shift + c
-    google-chrome-stable --app="https://meet.google.com/"
+    # wmctrl -l | grep "Google Meet\|Meet - " || brave --profile-directory=Default --app-id=dbpkegghbgplfeaapbejbnfpbgnbjedf && bspc node $(wmctrl -l | awk '/Meet - / || /Google Meet/ {print $1}') -t \~fullscreen
+    # brave --profile-directory=Default --app-id=dbpkegghbgplfeaapbejbnfpbgnbjedf
+    # google-chrome-stable --app="https://meet.google.com/"
 
-super + c
-    google-chrome-stable --app="https://classroom.google.com/"
+super + shift + c
+    brave --profile-directory=Default --app-id=ndifebeddhacfbfdgbfgpfihhmihpdkm
+    # google-chrome-stable --app="https://classroom.google.com/"
 
 super + a
     librewolf
@@ -159,10 +168,10 @@ super + e
     obs --use-fake-ui-for-media-stream
 
 super + period
-    element-desktop
+    alacritty -e tg
 
 super + shift + period
-    discord
+    ripcord
 
 super + shift + n
     $TERMINAL -e neomutt
@@ -183,4 +192,25 @@ F9
     xmodmap -e "pointer = 1 2 3"
 
 super + d
-    notify-send "GMT: $(TZ='GMT' date "+%b %d %I:%M%p")   EST: $(TZ='EST' date "+%b %d %I:%M%p")"
+    notify-send "GMT: $(TZ='GMT' date "+%b %d %I:%M%p")   EST: $(TZ='EST' date "+%b %d %I:%M%p")   PST: $(TZ='PST8PDT' date "+%b %d %I:%M%p")"
+
+super + shift + g
+    dm-pro /home/stegatxins0/.config/vn
+
+super + g
+    dm-pro /home/stegatxins0/.config/taskell/task
+
+super + shift + r
+    bspc node --flag sticky=off
+
+super + r
+    bspc node --flag sticky=on
+
+super + f
+    bspc node --state \~fullscreen
+
+super + {_,shift + }y
+    bspc node --layer {above,below}
+
+super + XF86_TouchpadToggle
+    (synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1

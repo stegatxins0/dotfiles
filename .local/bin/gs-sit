@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # OPTIONS
-newfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jpdailylog.md"
+newfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jap/jpdailylog.md"
 plotfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/img/ankistat.png"
-tablefile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jptablelog.md"
-allfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jpalllog.md"
+tablefile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jap/jptablelog.md"
+allfile="/home/stegatxins0/programming/stegatxins0.github.io/docs/jap/jpalllog.md"
 # END OPTIONS
 
 

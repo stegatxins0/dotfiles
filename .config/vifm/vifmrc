@@ -75,8 +75,8 @@ filetype *.zip,*.jar,*.war,*.ear,*.oxt FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINA
 fileviewer *.[1-8] man ./%c | col -b
 filetype *.[1-8] man ./%c
 
-fileviewer *.jpg,*.jpeg,*.png,*.ico,*.gif vifmimg draw %px %py %pw %ph %c %pc vifmimg clear
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.gif,*.xpm  rotdir %f 2>/dev/null | sxiv -ia 2>/dev/null &
+fileviewer *.webp,*.jpg,*.jpeg,*.png,*.ico,*.gif vifmimg draw %px %py %pw %ph %c %pc vifmimg clear
+filextype *.webp,*.bmp,*.jpg,*.jpeg,*.png,*.ico,*.gif,*.xpm  rotdir %f 2>/dev/null | sxiv -ia 2>/dev/null &
 
 filextype *.svg inkscape %f 2>/dev/null &
 filextype *.xcf gimp %f 2>/dev/null &

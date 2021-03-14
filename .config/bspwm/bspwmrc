@@ -16,6 +16,7 @@ bspc config remove_unplugged_monitors true
 # ---------------------------------
 bspc config border_width         2
 bspc config window_gap          12
+bspc rule -a Brave-browser:crx_dbpkegghbgplfeaapbejbnfpbgnbjedf=floating layer=above sticky=on rectangle=1920x1080+1919+1079
 
 # autostart
 pulseaudio --start
@@ -42,3 +43,4 @@ pgrep bs-swallow || bs-swallow &
 shortcuts &
 remaps &
 discover-overlay &
+synclient TouchpadOff=1 &

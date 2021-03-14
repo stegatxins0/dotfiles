@@ -10,7 +10,7 @@ esac
 inputsubject="${2:-justtotriggerthehelpmessage}"
 description="${3:-$inputsubject}"
 date="$(date -d "${4:-$(date "+%b %d %Y")}" "+%b %d %Y")"
-archivefile="/home/stegatxins0/programming/stegatxins0.github.io/docs/onlineclassarchive.md"
+archivefile="/home/stegatxins0/programming/stegatxins0.github.io/onlineclassarchive.md"
 # archivefile="/home/stegatxins0/programming/assignment/ea1a0202e19c4e09b014007aff24f8b6/archive.md"
 
 # subject code
@@ -42,9 +42,9 @@ subjectgit="$(echo $subject | sed 's/[A-Z]/\L&/g;s/ | /-/g;s/ /-/g')"
 # link=$(echo "https://odysee.com/$lbryname" | sed "s/\//\\\\\//g")
 filepath="$(readlink -f $videofile)"
 # youtube-upload --open-link --title="$youtubesubject" --description="$youtubedescription" --privacy="unlisted" $videofile
-link="$(lbrynet publish --name="$lbryname" --bid="0.001" --file_path="$filepath" --title="$lbrysubject" --description="$lbrydescription" | grep permanent_url | sed 's/.*": "//;s/",$//;' )"
+lbrylink="$(lbrynet publish --name="$lbryname" --bid="0.001" --file_path="$filepath" --title="$lbrysubject" --description="$lbrydescription" | grep permanent_url | sed 's/.*": "//;s/",$//;' )"
 odyseelink=$(echo $link | sed "s/lbry:\/\//https:\/\/odysee.com\//;s/\//\\\\\//g")
-lbrylink=$(echo $link | sed "s/lbry:\/\//https:\/\/m.subby.dev\/?redirect=lbry:\/\//;s/\//\\\\\//g")
+# lbrylink=$(echo $link | sed "s/lbry:\/\//https:\/\/m.subby.dev\/?redirect=lbry:\/\//;s/\//\\\\\//g")
 subjecttable="| $date | $description | [Odysee]($odyseelink) \/ [Lbry]($lbrylink) |"
 datetable="| $subject | $date | $description | [Odysee]($odyseelink) \/ [Lbry]($lbrylink) |"
 grep "### $subject" $archivefile || \

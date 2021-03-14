@@ -1,0 +1,3 @@
+#!/bin/sh
+
+eval $(cat $1 | awk -F ":::" -v cmd="$(cat $1 | awk -F ":::" '{print $1}' | dmenu -l 99 -p "何を読む?")" '$1 == cmd {print $2}')
