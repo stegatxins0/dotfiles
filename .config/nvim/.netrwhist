@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/stegatxins0/.config/picom'
+let g:netrw_dirhist_2='/home/stegatxins0/programming/stegatxins0.github.io/tech/scripting'
+let g:netrw_dirhist_1='/home/stegatxins0/h'
+let g:netrw_dirhist_0='/home/stegatxins0/programming/stegatxins0.github.io/.git'
+let g:netrw_dirhist_9='/home/stegatxins0/.config/taskell'
+let g:netrw_dirhist_8='/home/stegatxins0/.config/sxhkd'
+let g:netrw_dirhist_7='/home/stegatxins0/.config/discover_overlay'
+let g:netrw_dirhist_6='/home/stegatxins0/programming/permatabot/.git'
+let g:netrw_dirhist_5='/home/stegatxins0/programming/permatabot/commands'
+let g:netrw_dirhist_4='/home/stegatxins0/programming/permatabot'

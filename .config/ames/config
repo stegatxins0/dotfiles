@@ -1,0 +1,7 @@
+AUDIO_FIELD="例文音声"
+SCREENSHOT_FIELD="写真"
+# leave OUTPUT_MONITOR blank to autoselect a monitor.
+OUTPUT_MONITOR=""
+AUDIO_BITRATE="128k"
+AUDIO_FORMAT="opus"
+IMAGE_FORMAT="webp"

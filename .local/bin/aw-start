@@ -1,0 +1,9 @@
+#!/bin/sh
+
+insdir=/opt/activitywatch         # Put your ActivityWatch install folder here
+
+$insdir/aw-server/aw-server &
+$insdir/aw-watcher-afk/aw-watcher-afk &
+$insdir/aw-watcher-window/aw-watcher-window &                 # you can add --exclude-title here to exclude window title tracking for this session only
+
+notify-send "ActivityWatch started"   # Optional, sends a notification when ActivityWatch is started

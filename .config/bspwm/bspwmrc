@@ -44,3 +44,6 @@ shortcuts &
 remaps &
 discover-overlay &
 synclient TouchpadOff=1 &
+aw-start &
+http-server -p 7777 /mnt/storage/日本語/Sites/ &
+lxsession &

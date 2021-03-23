@@ -1,0 +1,8 @@
+#!/bin/sh
+for vid in *mkv
+do
+    ffmpeg -i "$vid" "$vid.temp.ass"
+    sed -i "/\,Music\,/d" "$vid.temp.ass"
+    subs2cia condense -i "$vid" "$vid.temp.ass" -p 150
+    rm "$vid.temp.ass"
+done

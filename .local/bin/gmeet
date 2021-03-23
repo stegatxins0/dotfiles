@@ -2,6 +2,6 @@
 appid="dbpkegghbgplfeaapbejbnfpbgnbjedf"
 
 case "$1" in
-    "c") wmctrl -l | grep "Jitsi Meet\|Google Meet\|Meet - " && bspc query -N -n .focused | grep -i "$(wmctrl -l | awk '/Jitsi Meet/ || /Meet - / || /Google Meet/ {print $1}')" || bspc node -c ;;
+    "c") wmctrl -l | grep "Jitsi Meet\|Google Meet\|Zoom Meeting\|Meet - " && bspc query -N -n .focused | grep -i "$(wmctrl -l | awk '/Jitsi Meet/ || /Meet - / || /Google Meet/ || /Zoom Meeting/ {print $1}')" || bspc node -c ;;
     "l") wmctrl -l | grep "Jitsi Meet\|Google Meet\|Meet - " || brave --profile-directory=Default --app-id=$appid && bspc node $(wmctrl -l | awk '/Meet - / || /Jitsi Meet/ || /Google Meet/ {print $1}') -t \~fullscreen ;;
 esac
